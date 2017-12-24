@@ -1,0 +1,21 @@
+
+void print(const char* S, const int l)
+{
+    int i, j;
+    char n[45] = "";
+    printSpecialLine(l+4);
+    printf("\n");
+    for(i = 0, j = 0; S[i] != '\0'; i++)
+    {
+        if(S[i] != ' ')
+            n[j++] = S[i];
+        else
+        {
+            n[j++] = '\0';
+            j = 0;
+            printLine(l, n);
+        }
+    }
+    printLine(l, n);
+    printSpecialLine(l+4);
+}

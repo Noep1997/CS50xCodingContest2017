@@ -1,0 +1,64 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf760
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #include <string.h>\
+#include <stdio.h>\
+\
+\
+int is_available() \{\
+    \
+    int consecutive = 0;\
+    \
+    for (int i = 0; i < floors; i++) \{\
+        \
+        int length = strlen(floors_layout[i]);\
+        \
+        for (int c = 0; c < length; c++) \{\
+            \
+            if (floors_layout[i][c] == 0) \{\
+                consecutive += 1;\
+                \
+                if (consecutive == consecutive_rooms) \{\
+                return 1;\
+                \}\
+            \}\
+            \
+            else\
+                consecutive = 0;\
+        \}       \
+    \}\
+    \
+    return 0;\
+    \
+\}\
+\
+int main(void)\
+\{\
+    char input = scanf("[^\\n]");\
+    const char space[2] = " ";\
+    \
+    int floors = atoi(strtok(input, space));\
+    \
+    int rooms = atoi(strtok(NULL, space));\
+    \
+    char floors_layout[floors]; \
+    \
+    for (int i = 0; i < floors; i++) \{\
+        floors_layout[i] = get_string(); \
+    \}\
+    \
+    int consecutive_rooms = get_int();\
+\
+    if (is_available)\
+        printf("1\\n");\
+    \
+    else\
+        printf("0\\n");\
+    \
+    return 0;\
+    \
+\}}

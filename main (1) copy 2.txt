@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int F, D, E, i;
+    scanf("%d", &F);
+    scanf("%d", &D);
+
+    for(i = 0; i < D && F >= 0; i++)
+    {
+        scanf("%d", &E);
+        F-=E;
+        if(F < 0)
+            i--;
+    }
+    if(F>=0)
+        printf("Happy Cat!");
+    else
+        printf("%d", i);
+    return 0;
+}
+
+
+
+
+#include <string.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int fishes, days, meal;
+    int nofish = 0;
+   
+    scanf("%d", &fishes);
+    scanf("%d", &days);
+    
+    for (int i = 0; i < days; i++) {
+        scanf("%d", &meal);
+        fishes -= meal;
+        
+        if (fishes < 0 && nofish == 0)
+            nofish == i;
+    }
+    
+    if (fishes >= 0)
+        printf("Happy Cat!\n");
+    else
+        printf("%d\n", nofish);
+    
+    return 0;
+}

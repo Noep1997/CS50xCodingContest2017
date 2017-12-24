@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 200
+
+int search(char* S)
+{
+    static const char ends[4][3] = {"th","st","nd","rd"};
+    int cpt = 1;
+    char b = 0;
+    int i;
+    for(i = 0; i < N-4 && S[i] != '\0' && !b; i++)
+    {
+        if(S[i] == ' ')
+            cpt++;
+        else if(S[i] == 'c' && S[i+1] == 'a' && S[i+2] == 't' && (S[i+3] == ' ' || S[i+3] == '\0'))
+        {
+            printf("The cat is the %d%s item in the box", cpt, ends[cpt > 3 ? 0 : cpt]);
+            return 1;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    //TODO : ajouter le get
+    char S[N] = "correct cathorse battery staple";
+    if(S[0] == '\0')
+        printf("There is no box");
+    else if(!search(S))
+        printf("No cat yet");
+    return 0;
+}

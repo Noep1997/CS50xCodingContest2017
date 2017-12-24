@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 1000000
+
+typedef struct op
+{
+    int sum;
+    void (*action)(struct op*, int add);
+}Interpreter;
+
+void add(Interpreter* op, const int add)
+{
+    op->sum += add;
+}
+
+void min(Interpreter* op, const int add)
+{
+    op->sum -= add;
+}
+
+void number(const char* S, int* i, Interpreter* sum)
+{
+    char n[9] = ""; // size max précisée + \0
+    int j;
+    for(j = 0; S[*i] != '\0' && S[*i] > 0x2F; (*i)++)
+        n[j++] = S[*i];
+    sum->action(sum, atoi(n));
+    (*i)--;
+}
+
+void operator(const char* S, int* i, Interpreter* sum)
+{
+    char c = S[*i];
+    if(c == '-')
+        sum->action = min;
+    else
+        sum->action = add;
+}
+
+int parse(const char* S)
+{
+    void (*action[2])(const char*, int*, Interpreter*) = {number, operator};
+    Interpreter sum;
+    sum.sum = 0;
+    sum.action = add;
+    int cpt = 0;
+    int i;
+    for(i = 0; S[i] != '\0'; i++)
+    {
+        if(S[i] != ' ')
+        {
+            if(!cpt && S[i] == '-')
+                cpt++;
+            action[cpt&1](S, &i, &sum);
+            cpt++;
+        }
+    }
+    return sum.sum;
+}
+
+int main()
+{
+    char S[N];
+    scanf("%[^\n]", S);
+    printf("%d", parse(S));
+    return 0;
+}
